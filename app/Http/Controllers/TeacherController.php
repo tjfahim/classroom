@@ -1,0 +1,54 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Teacher;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+
+class TeacherController extends Controller
+{
+    public function teacherregister(Request $req){
+        $teacher=Teacher::create([
+            'name'=>$req->name,
+            'email'=>$req->email,
+            'qualification'=>$req->qualification,
+            'password'=>Hash::make($req->password)
+        ]);
+        if($teacher){
+            return response()->json([$teacher,'status'=>true]);
+        }
+        else{
+            return response()->json(['status'=>false]);
+        }
+    }
+
+
+    public function teacherlog(Request $request){
+        $credentials = $request->only('email', 'password');
+
+        if (! $token = auth()->guard('teacher-api')->attempt($credentials)) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        return $token;
+    }
+
+    public function teacher()
+    {
+        return response()->json(auth()->guard('teacher-api')->user());
+    }
+
+    /**
+     * Log the user out (Invalidate the token)
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function teacherlogout()
+    {
+        auth()->guard('teacher-api')->logout();
+
+        return response()->json(['message' => 'Successfully logged out']);
+    }
+
+}

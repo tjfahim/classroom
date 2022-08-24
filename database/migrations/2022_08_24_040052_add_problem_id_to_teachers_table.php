@@ -13,8 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('problem_requests', function (Blueprint $table) {
-            //
+        Schema::table('teachers', function (Blueprint $table) {
+
+             $table->bigInteger('problem_id')->unsigned()->nullable();
+
+
+            $table->foreign('problem_id')->references('id')->on('problem_requests')->onDelete('cascade');
         });
     }
 
@@ -25,8 +29,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('problem_requests', function (Blueprint $table) {
-            $table->boolean('status')->deafult(0);
+        Schema::table('teachers', function (Blueprint $table) {
+            //
         });
     }
 };

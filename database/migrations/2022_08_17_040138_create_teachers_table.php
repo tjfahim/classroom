@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('qualification');
             $table->rememberToken();
             $table->timestamps();
+
+          
         });
     }
 

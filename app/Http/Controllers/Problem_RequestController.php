@@ -14,11 +14,12 @@ class Problem_RequestController extends Controller
      */
     public function index()
     {
-        $problem = Problem_request::all();
-        return response()->json([
-        "success" => true,
-        "message" => "Problem List",
-        "data" => $problem]);
+        // $problem = Problem_request::all();
+        // return response()->json([
+        // "success" => true,
+        // "message" => "Problem List",
+        // "data" => $problem]);
+        return Problem_request::get();
     }
 
 
@@ -38,26 +39,70 @@ class Problem_RequestController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+            public function store(Request $request)
+            {
+        //         $input = $request->all();
+        //         $validator = Validator::make($input, [
+        //         'title' => 'required',
+        //         'description' => 'required',
+        //         'subject' => 'required',
+        //         'image' => 'required',
+        //         'date' => 'required',
+        //         ]);
+        //         if($validator->fails()){
+        //         return $this->sendError('Validation Error.', $validator->errors());
+        //         }
+        //         $problem = Problem_request::create($input);
+        //         return response()->json([
+        //         "success" => true,
+        //         "message" => "Problem created successfully.",
+        //         "data" => $problem
+        // ]);
+
+
+        // $input=new Problem_request();
+        // $input->title = $request->Problem_request['title'];
+        // $input->description = $request->Problem_request['description'];
+        // $input->subject = $request->Problem_request['subject'];
+        // $input->image = $request->Problem_request['image'];
+        // $input->date = $request->Problem_request['date'];
+        // $input->status = $request->Problem_request['status'];
+
+        // $input->save();
+        // return $input;
+        //     }
+
         $input = $request->all();
-        $validator = Validator::make($input, [
-        'title' => 'required',
-        'description' => 'required',
-        'subject' => 'required',
-        'image' => 'required',
-        'date' => 'required',
-        ]);
-        if($validator->fails()){
-        return $this->sendError('Validation Error.', $validator->errors());
-        }
+        // $validator = Validator::make($input, [
+        // 'title' => 'required',
+        // 'description' => 'required',
+        // 'subject' => 'required',
+        // 'image' => 'required',
+        // 'date' => 'required',
+        // ]);
+        // if($validator->fails()){
+        // return $this->sendError('Validation Error.', $validator->errors());
+        // }
         $problem = Problem_request::create($input);
         return response()->json([
         "success" => true,
-        "message" => "Problem created successfully.",
+        "message" => "problem created successfully.",
         "data" => $problem
-]);
-    }
+        ]);}
+
+
+// public function store(Request $request)
+//     {
+//         $item=new Problem_request();
+//         $item->title = $request->Problem_request['title'];
+//         $item->description = $request->Problem_request['description'];
+//         $item->subject = $request->Problem_request['subject'];
+//         $item->image = $request->Problem_request['image'];
+//         $item->date = $request->Problem_request['date'];
+
+//         $item->save();
+//         return $item;
+//     }
 
     // public function store(Request $request)
     // {
@@ -92,6 +137,7 @@ class Problem_RequestController extends Controller
         ]);
     }
 
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -120,9 +166,9 @@ class Problem_RequestController extends Controller
     //     'date' => 'required',
     //     'subject' => 'required'
     //     ]);
-    //     if($validator->fails()){
-    //     return $this->sendError('Validation Error.', $validator->errors());
-    //     }
+    //     // if($validator->fails()){
+    //     // return $this->sendError('Validation Error.', $validator->errors());
+    //     // }
     //     $problem->title = $input['title'];
     //     $problem->description = $input['description'];
     //     $problem->image = $input['image'];
@@ -140,47 +186,42 @@ class Problem_RequestController extends Controller
     // }
 
 
-    public function update(Problem_request $problem, Request $request)
-    {
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'image' => 'required',
-            'date' => 'required',
-            'subject' => 'required',
-            ]);
-        $problem->title = $request->title;
-        $problem->description = $request->description;
-        $problem->image = $request->image;
-        $problem->date = $request->date;
-        $problem->subject = $request->subject;
+    // public function update(Request $request, Problem_request $problem)
+    // {
 
-        $problem->save();
+    // $problem->title = $request->title;
+    //     $problem->description = $request->description;
+    //     $problem->image = $request->image;
+    //     $problem->date = $request->date;
+    //     $problem->subject = $request->subject;
+    //     $problem->save();
+    //     return response()->json([
+    //     "success" => true,
+    //     "message" => "problem updated successfully.",
+    //     "data" => $problem
+    //     ]);
+
+
+    public function update(Request $request, $id)
+    {
+        $updateproblem = Problem_request::find($id);
+        $input = $request->all();
+        // $updateproblem->title = $request->$input['title'];
+        //     $updateproblem->description = $request->$input['description'];
+        //     $updateproblem->subject = $request->$input['subject'];
+        //     $updateproblem->image = $request->$input['image'];
+        //     $updateproblem->date = $request->$input['date'];
+        //     $updateproblem->save();
+        $updateproblem->fill($input);
+        $updateproblem->save();
+
         return response()->json([
             "success" => true,
-            "message" => "problem updated successfully.",
-            "data" => $problem
+            "message" => "Problem updated successfully.",
+            "data" => $updateproblem
             ]);
 
-    }
-    // public function update(Request $request, $id)
-    // {
-    //     $updateproblem = Problem_request::find($id);
-    //     $input = $request->all();
-
-    //     if($updateproblem){
-    //         $updateproblem->title = $request->$input['title'];
-    //         $updateproblem->description = $request->$input['description'];
-    //         $updateproblem->subject = $request->$input['subject'];
-    //         $updateproblem->image = $request->$input['image'];
-    //         $updateproblem->date = $request->$input['date'];
-    //         $updateproblem->save();
-    //         return response()->json([
-    //             "success" => true,
-    //             "message" => "Problem updated successfully.",
-    //             "data" => $updateproblem
-    //             ]);
-    // }}
+         }
 
     /**
      * Remove the specified resource from storage.
@@ -188,6 +229,11 @@ class Problem_RequestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+
+
+
+
     public function destroy(Problem_request $problem)
     {
         $problem->delete();
@@ -197,5 +243,25 @@ class Problem_RequestController extends Controller
         "data" => $problem
         ]);
         }
-    }
+        // public function changeStatus(Problem_request $problem, Request $request)
+        // {
+        //     $problem = Problem_request::find($request->id)->update(['status' => $request->status]);
+
+        //     return response()->json([
+        //         "success" => true,
+        //         "message" => "Problem deleted successfully.",
+        //         "data" => $problem
+        //         ]);
+        // }
+     
+
+}
+
+
+
+
+
+
+
+
 

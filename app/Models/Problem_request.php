@@ -16,11 +16,14 @@ class Problem_request extends Model
         'image',
         'status',
         'student_id',
-
-
     ];
 
-    public function student(){
-        return $this->belongsTo(Problem_request::class);
+
+        public function user(){
+        return $this->belongsTo(User::class,'student_id');
     }
+    // public function user(){
+    //     return $this->belongsTo(User::class);
+    // }
+
 }

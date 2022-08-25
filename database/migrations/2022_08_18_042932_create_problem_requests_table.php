@@ -20,16 +20,15 @@ return new class extends Migration
             $table->string('subject');
             $table->string('image')->nullable();
             $table->string('date')->nullable();
-            $table->boolean('status')->deafult(0)->nullable();
+            $table->boolean('status')->deafult(0);
             $table->timestamps();
+
             // $table->bigInteger('student_id')->unsigned()->nullable();
-
-
             // $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
 
-            $table->foreignId('student_id')->constrained('users');
+            $table->foreignId('users_id')->constrained()->nullable();
         });
-        
+
 
     }
 

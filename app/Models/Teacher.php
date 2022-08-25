@@ -59,7 +59,11 @@ class Teacher extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
-    public function problem_requests(){
-        return $this->belongsTo(Teacher::class,'problem_id');
-    }
+    // public function problem_requests(){
+    //     return $this->belongsTo(Teacher::class,'problem_id');
+    // }
+    public function messages()
+        {
+        return $this->hasMany(message::class);
+        }
 }

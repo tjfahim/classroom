@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\Problem_RequestController;
 use App\Http\Controllers\StudentController;
 use App\Models\Problem_request;
@@ -39,6 +40,7 @@ Route::group(['middleware' => 'admin:admin-api'], function () {
 
 // Teacher
 Route::post('teacherregister', [App\Http\Controllers\TeacherController::class,'teacherregister'])->name('teacherregister');
+
 Route::post('teacherlog', [App\Http\Controllers\TeacherController::class,'teacherlog'])->name('teacherlog');
 Route::view('teacherlog','Teacher/login')->name('teacherlog');
 
@@ -65,5 +67,6 @@ Route::group(['middleware' => 'student:student-api'], function () {
     Route::post('student', [App\Http\Controllers\StudentController::class,'student'])->name('student');
     // Route::post('problemcreate', [App\Http\Controllers\Problem_RequestController::class,'store']);
     Route::resource('/problems', Problem_RequestController::class);
+    Route::resource('/message', MessageController::class);
 
 });

@@ -23,6 +23,27 @@ class TeacherController extends Controller
             return response()->json(['status'=>false]);
         }
     }
+    // public function teacherregister1(Request $req){
+    //     $teacher=Teacher::create([
+    //         'name'=>$req->name,
+    //         'email'=>$req->email,
+    //         'qualification'=>$req->qualification,
+    //         'password'=>Hash::make($req->password)
+    //     ]);
+    //     if($teacher){
+    //         return response()->json([$teacher,'status'=>true]);
+    //     }
+    //     else{
+    //         return response()->json(['status'=>false]);
+    //     }
+    //     $credentials = $req->only('email', 'password');
+
+    //     if (! $token = auth()->guard('teacher-api')->attempt($credentials)) {
+    //         return response()->json(['error' => 'Unauthorized'], 401);
+    //     }
+
+    //     return $token;
+    // }
 
 
     public function teacherlog(Request $request){

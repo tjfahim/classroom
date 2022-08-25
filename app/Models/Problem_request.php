@@ -15,12 +15,12 @@ class Problem_request extends Model
         'date',
         'image',
         'status',
-        'student_id',
+        'users_id',
     ];
 
 
         public function user(){
-        return $this->belongsTo(User::class,'student_id');
+        return $this->belongsTo(User::class,'users_id');
     }
     // public function user(){
     //     return $this->belongsTo(User::class);

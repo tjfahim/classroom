@@ -1,5 +1,7 @@
 <?php
 
+use App\Events\Message;
+use App\Models\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 /*
@@ -19,3 +21,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
+
+Route::post('send-message',function (Request $request){
+        event(new Message($request->username,$request->message));
+        return ['success' =>true];
+});

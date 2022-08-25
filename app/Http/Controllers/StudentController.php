@@ -21,7 +21,33 @@ class StudentController extends Controller
         else{
             return response()->json(['status'=>false]);
         }
+
     }
+    // public function studentregister1(Request $req){
+    //     $student=User::create([
+    //         'name'=>$req->name,
+    //         'email'=>$req->email,
+    //         'subject'=>$req->subject,
+    //         'password'=>Hash::make($req->password)
+    //     ]);
+    //     if($student){
+    //         return response()->json([$student,'status'=>true]);
+    //     }
+    //     else{
+    //         return response()->json(['status'=>false]);
+    //     }
+
+    //    return $this->createNewToken($token);0000
+    // }
+
+    // protected function createNewToken($token){
+    //     return response()->json([
+    //         'access_token' => $token,
+    //         'token_type' => 'bearer',
+    //         'expires_in' => auth()->factory()->getTTL() * 60,
+    //         'user' => auth()->user()
+    //     ]);
+    // }
 
     public function studentlog(Request $request){
         $credentials = $request->only('email', 'password');

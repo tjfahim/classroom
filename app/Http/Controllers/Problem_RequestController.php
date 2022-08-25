@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Problem_request;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Validator;
 class Problem_RequestController extends Controller
 {
@@ -72,7 +73,8 @@ class Problem_RequestController extends Controller
         // return $input;
         //     }
 
-        $input = $request->all();
+       $input = $request->all();
+
         // $validator = Validator::make($input, [
         // 'title' => 'required',
         // 'description' => 'required',
@@ -83,12 +85,35 @@ class Problem_RequestController extends Controller
         // if($validator->fails()){
         // return $this->sendError('Validation Error.', $validator->errors());
         // }
-        $problem = Problem_request::create($input);
+
+
+
+        // $problem = Problem_request::create($input);
+
+
+        // return response()->json([
+        // "success" => true,
+        // "message" => "problem created successfully.",
+        // "data" => $problem
+        // ]);}
+
+
+        $problem = Problem_request::create([
+            "users_id"=>Auth::user()->id,
+            "title"=>$request->title,
+            'description'=>$request->description,
+            'subject'=>$request->subject,
+            'date'=>$request->date,
+            'image'=>$request->image,
+            'status'=>$request->status,
+        ]);
         return response()->json([
-        "success" => true,
-        "message" => "problem created successfully.",
-        "data" => $problem
-        ]);}
+                "success" => true,
+                "message" => "problem created successfully.",
+                "data" => $problem
+                ]);}
+
+
 
 
 // public function store(Request $request)
@@ -253,7 +278,7 @@ class Problem_RequestController extends Controller
         //         "data" => $problem
         //         ]);
         // }
-     
+
 
 }
 

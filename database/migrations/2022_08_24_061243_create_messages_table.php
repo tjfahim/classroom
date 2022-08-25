@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('users_id')->constrained()->nullable();
+            $table->foreignId('teachers_id')->constrained();
+            $table->string('message')->nullable();
+            $table->string('file')->nullable();
             $table->timestamps();
         });
     }

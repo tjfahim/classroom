@@ -8,6 +8,8 @@
         <!-- Latest compiled and minified CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 
+        @vite(['resources/css/app.css','resources/js/app.js'])
+
 
         <style>
             body {
@@ -48,7 +50,7 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" name="username" id="username" placeholder="type Message..">
                                 <span class="input-group-btn">
-                                    <button type="submit" id="send_message" class="btn btn-primary"></button>
+                                    <button type="submit" id="send_message" class="btn btn-primary">Send</button>
                                 </span>
                             </div>
                     </div>

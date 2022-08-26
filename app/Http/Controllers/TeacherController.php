@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\message;
 use App\Models\Problem_request;
 use App\Models\Teacher;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class TeacherController extends Controller
 {
     public function teacherregister(Request $req){
-        $teacher=Teacher::create([
+        $teacher=User::create([
             'name'=>$req->name,
             'email'=>$req->email,
+            'type'=>'teacher',
             'qualification'=>$req->qualification,
             'password'=>Hash::make($req->password)
         ]);
@@ -105,5 +109,17 @@ class TeacherController extends Controller
                     return $available_problem;
 
         }
+
+        public function message()
+        {
+
+            // return message::pluck('message','created_at');
+
+            return message::pluck('message','created_at');
+
+
+}
+
+
 
 }

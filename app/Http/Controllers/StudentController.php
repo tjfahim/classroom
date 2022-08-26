@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class StudentController extends Controller
@@ -12,7 +13,7 @@ class StudentController extends Controller
         $student=User::create([
             'name'=>$req->name,
             'email'=>$req->email,
-            'subject'=>$req->subject,
+            'type'=>'student',
             'password'=>Hash::make($req->password)
         ]);
         if($student){
@@ -49,15 +50,26 @@ class StudentController extends Controller
     //     ]);
     // }
 
-    public function studentlog(Request $request){
-        $credentials = $request->only('email', 'password');
+    public function login(Request $request){
 
-        if (! $token = auth()->guard('student-api')->attempt($credentials)) {
+        $user = User::where('email', '=', $request->email)->first();
+        if(!$user) return "Email does Not found";
+        if (! $token = auth()->guard('student-api')->attempt([
+            'email'=>$request->email,
+            'password'=>$request->password,
+            'type'=>"$user->type",
+            // 'type'=> "$user ?? $user->type",
+
+
+
+        ])) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
+        return[
+            'token'=>$token,
+            'data'=>$user,
 
-        return $token;
-    }
+        ];}
 
     public function student()
     {

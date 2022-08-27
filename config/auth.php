@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\User;
+
 return [
 
     /*
@@ -48,10 +50,10 @@ return [
             'driver' => 'jwt',
             'provider' => 'teachers',
         ],
-        'admin-api' => [
-            'driver' => 'jwt',
-            'provider' => 'admins',
-        ],
+        // 'admin-api' => [
+        //     'driver' => 'jwt',
+        //     'provider' => 'admins',
+
     ],
 
     /*
@@ -68,8 +70,10 @@ return [
     | be assigned to any extra authentication guards you have defined.
     |
     | Supported: "database", "eloquent"
-    |
-    */
+    // |
+    // */
+    // $user = User::where('type', '=', 'teacher'),
+    // $user1 = User::where('type', '=','student'),
 
     'providers' => [
         'users' => [
@@ -78,12 +82,12 @@ return [
         ],
         'teachers' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Teacher::class,
+            'model' => App\Models\User::class,
         ],
-        'admins' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Admin::class,
-        ],
+        // 'admins' => [
+        //     'driver' => 'eloquent',
+        //     'model' => App\Models\Admin::class,
+        // ],
 
         // 'users' => [
         //     'driver' => 'database',

@@ -26,7 +26,7 @@ class AuthenticateStudent extends Middleware
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
-            return route('studentlog');
+            return route('login');
         }
     }
 }

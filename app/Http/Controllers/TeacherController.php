@@ -50,19 +50,20 @@ class TeacherController extends Controller
     // }
 
 
-    public function teacherlog(Request $request){
-        $credentials = $request->only('email', 'password');
+    // public function teacherlog(Request $request){
+    //     $credentials = $request->only('email', 'password');
 
-        if (! $token = auth()->guard('teacher-api')->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
+    //     if (! $token = auth()->guard('teacher-api')->attempt($credentials)) {
+    //         return response()->json(['error' => 'Unauthorized'], 401);
+    //     }
 
-        return $token;
-    }
+    //     return $token;
+    // }
 
     public function teacher()
     {
         return response()->json(auth()->guard('teacher-api')->user());
+
     }
 
     /**

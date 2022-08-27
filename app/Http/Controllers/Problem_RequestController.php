@@ -105,7 +105,7 @@ class Problem_RequestController extends Controller
             'subject'=>$request->subject,
             'date'=>$request->date,
             'image'=>$request->image,
-            'status'=>$request->status,
+            'status'=>0,
         ]);
         return response()->json([
                 "success" => true,

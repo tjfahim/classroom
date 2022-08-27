@@ -46,9 +46,9 @@
                         <div class="direct-chat-massages" id="messages"></div>
                     </div>
                     <div class="box-footer">
-                        <form action="#" method="post" id="message_form">
+                        <form action="#" method="" id="message_form">
                             <div class="input-group">
-                                <input type="text" class="form-control" name="username" id="username" placeholder="type Message..">
+                                <input type="text" class="form-control" name="message" id="message" placeholder="type Message..">
                                 <span class="input-group-btn">
                                     <button type="submit" id="send_message" class="btn btn-primary">Send</button>
                                 </span>

@@ -26,7 +26,7 @@ class AuthenticateTeacher extends Middleware
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
-            return route('teacherlog');
+            return route('login');
         }
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\Problem_RequestController;
 use App\Http\Controllers\StudentController;
@@ -23,51 +24,57 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
-
-
+Route::post('studentregister', [App\Http\Controllers\StudentController::class,'studentregister'])->name('studentregister');
+Route::post('teacherregister', [App\Http\Controllers\TeacherController::class,'teacherregister'])->name('teacherregister');
 Route::post('login', [App\Http\Controllers\HomeController::class,'login']);
+Route::post('logout', [App\Http\Controllers\HomeController::class,'logout']);
 
 
 
-
+Route::post('user.register', [App\Http\Controllers\Api\AuthController::class,'register']);
+Route::post('user.login', [App\Http\Controllers\Api\AuthController::class,'login']);
 
 
 
 // Teacher
 Route::post('teacherregister', [App\Http\Controllers\TeacherController::class,'teacherregister'])->name('teacherregister');
+Route::middleware(['auth:teacher-api'])->group(function () {
 
-Route::group(['middleware' => 'teacher:teacher-api'], function () {
+// Route::group(['middleware' => 'teacher:teacher-api'], function () {
     Route::post('teacherlogout', [App\Http\Controllers\TeacherController::class,'teacherlogout'])->name('teacherlogout');
     Route::post('teacher', [App\Http\Controllers\TeacherController::class,'teacher'])->name('teacher');
 
     Route::get('allproblems', [App\Http\Controllers\TeacherController::class,'available_problem']);
     // Route::get('changeStatus/{id}', [App\Http\Controllers\TeacherController::class,'changeStatus']);
     Route::put('changeStatus/{id}', [App\Http\Controllers\TeacherController::class,'update']);
-    // Route::get('message', [App\Http\Controllers\TeacherController::class,'message']);
-    // // Route::resource('/message', MessageController::class);
-    // Route::get('/tmessage', [App\Http\Controllers\TeacherController::class,'message']);
+    Route::get('message', [App\Http\Controllers\TeacherController::class,'message']);
+    // Route::resource('/message', MessageController::class);
+    Route::get('/tmessage', [App\Http\Controllers\TeacherController::class,'message']);
 
 
 });
 
 
 
+
+
 // Student
 
-Route::post('logins', [App\Http\Controllers\StudentController::class,'login']);
 
 Route::post('studentregister', [App\Http\Controllers\StudentController::class,'studentregister'])->name('studentregister');
 
-Route::view('studentlog','Admin/login')->name('studentlog');
+// Route::view('studentlog','Admin/login')->name('studentlog');
 
-Route::group(['middleware' => 'student:student-api'], function () {
+Route::middleware(['auth:student-api'])->group(function () {
+// Route::group(['middleware' => 'student:student-api'], function () {
     Route::post('studentlogout', [App\Http\Controllers\StudentController::class,'studentlogout'])->name('studentlogout');
     Route::post('student', [App\Http\Controllers\StudentController::class,'student'])->name('student');
     // Route::post('problemcreate', [App\Http\Controllers\Problem_RequestController::class,'store']);
     Route::resource('/problems', Problem_RequestController::class);
     // Route::resource('/message', MessageController::class);
     // Route::get('/tmessage', [App\Http\Controllers\TeacherController::class,'message']);
-
+    Route::get('/test', function () {
+        return '$request->user';
+    });
 
 });

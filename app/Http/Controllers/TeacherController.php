@@ -7,6 +7,7 @@ use App\Models\Problem_request;
 use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -60,6 +61,21 @@ class TeacherController extends Controller
     //     return $token;
     // }
 
+
+    public function update(Request $request)
+    {
+         $teacher =Auth::user();
+         $input = $request->all();
+        $teacher->fill($input);
+         $teacher->save();
+         return response()->json([
+            "success" => true,
+            "message" => "Teacher updated successfully.",
+            "data" => $teacher
+            ]);
+
+         }
+
     public function teacher()
     {
         return response()->json(auth()->guard('teacher-api')->user());
@@ -78,7 +94,7 @@ class TeacherController extends Controller
         return response()->json(['message' => 'Successfully logged out']);
     }
 
-    public function update(Request $request, $id)
+    public function statusupdate(Request $request, $id)
             {
                 $updateproblem = Problem_request::find($id);
 

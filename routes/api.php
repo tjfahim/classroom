@@ -43,10 +43,11 @@ Route::middleware(['auth:teacher-api'])->group(function () {
 // Route::group(['middleware' => 'teacher:teacher-api'], function () {
     // Route::post('teacherlogout', [App\Http\Controllers\TeacherController::class,'teacherlogout'])->name('teacherlogout');
     Route::post('teacher', [App\Http\Controllers\TeacherController::class,'teacher'])->name('teacher');
+    Route::post('teacherUpdate', [App\Http\Controllers\TeacherController::class,'update'])->name('updateteacher');
 
     Route::get('allproblems', [App\Http\Controllers\TeacherController::class,'available_problem']);
     // Route::get('changeStatus/{id}', [App\Http\Controllers\TeacherController::class,'changeStatus']);
-    Route::put('changeStatus/{id}', [App\Http\Controllers\TeacherController::class,'update']);
+    Route::put('changeStatus/{id}', [App\Http\Controllers\TeacherController::class,'statusupdate']);
     Route::get('message', [App\Http\Controllers\TeacherController::class,'message']);
     // Route::resource('/message', MessageController::class);
     // Route::get('/tmessage', [App\Http\Controllers\TeacherController::class,'message']);
@@ -69,6 +70,7 @@ Route::middleware(['auth:student-api'])->group(function () {
 // Route::group(['middleware' => 'student:student-api'], function () {
     Route::post('studentlogout', [App\Http\Controllers\StudentController::class,'studentlogout'])->name('studentlogout');
     Route::post('student', [App\Http\Controllers\StudentController::class,'student'])->name('student');
+    Route::post('studentUpdate', [App\Http\Controllers\StudentController::class,'update'])->name('updatestudent');
     // Route::post('problemcreate', [App\Http\Controllers\Problem_RequestController::class,'store']);
     Route::resource('/problems', Problem_RequestController::class);
     // Route::resource('/message', MessageController::class);

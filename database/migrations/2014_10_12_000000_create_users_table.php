@@ -24,6 +24,15 @@ return new class extends Migration
             // $table->integer('role')->default(0);
             $table->rememberToken();
             $table->string('type');
+            $table->string('gender')->nullable();
+            $table->date('birth_of_date')->nullable();
+            $table->string('religion')->nullable();
+            $table->string('class')->nullable();
+            $table->string('section')->nullable();
+            $table->string('student_id')->nullable();
+            $table->string('address')->nullable();
+            $table->string('phone')->nullable();
+
 
             $table->timestamps();
         });

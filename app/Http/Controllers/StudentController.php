@@ -24,6 +24,23 @@ class StudentController extends Controller
         }
 
     }
+
+
+    public function update(Request $request)
+    {
+         $student =Auth::user();
+         $input = $request->all();
+        $student->fill($input);
+         $student->save();
+         return response()->json([
+            "success" => true,
+            "message" => "Student updated successfully.",
+            "data" => $student
+            ]);
+
+         }
+
+
     // public function studentregister1(Request $req){
     //     $student=User::create([
     //         'name'=>$req->name,
@@ -50,29 +67,30 @@ class StudentController extends Controller
     //     ]);
     // }
 
-    public function login(Request $request){
+    // public function login(Request $request){
 
-        $user = User::where('email', '=', $request->email)->first();
-        if(!$user) return "Email does Not found";
-        if (! $token = auth()->guard('student-api')->attempt([
-            'email'=>$request->email,
-            'password'=>$request->password,
-            'type'=>"$user->type",
-            // 'type'=> "$user ?? $user->type",
+    //     $user = User::where('email', '=', $request->email)->first();
+    //     if(!$user) return "Email does Not found";
+    //     if (! $token = auth()->guard('student-api')->attempt([
+    //         'email'=>$request->email,
+    //         'password'=>$request->password,
+    //         'type'=>"$user->type",
+    //         // 'type'=> "$user ?? $user->type",
 
 
 
-        ])) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
-        return[
-            'token'=>$token,
-            'data'=>$user,
+    //     ])) {
+    //         return response()->json(['error' => 'Unauthorized'], 401);
+    //     }
+    //     return[
+    //         'token'=>$token,
+    //         'data'=>$user,
 
-        ];}
+    //     ];}
 
     public function student()
     {
+
         return response()->json(auth()->guard('student-api')->user());
     }
 

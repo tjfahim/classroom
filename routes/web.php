@@ -22,7 +22,10 @@ Route::get('/', function () {
 Auth::routes();
 
 
-Route::post('send-message',function (Request $request){
+Route::post('send_message',function (Request $request){
         event(new Message($request->username,$request->message));
-        return ['success' =>true];
+        return [
+            'success' =>true,
+
+        ];
 });

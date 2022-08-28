@@ -31,8 +31,8 @@ Route::post('logout', [App\Http\Controllers\HomeController::class,'logout']);
 
 
 
-Route::post('user.register', [App\Http\Controllers\Api\AuthController::class,'register']);
-Route::post('user.login', [App\Http\Controllers\Api\AuthController::class,'login']);
+// Route::post('user.register', [App\Http\Controllers\Api\AuthController::class,'register']);
+// Route::post('user.login', [App\Http\Controllers\Api\AuthController::class,'login']);
 
 
 
@@ -41,7 +41,7 @@ Route::post('teacherregister', [App\Http\Controllers\TeacherController::class,'t
 Route::middleware(['auth:teacher-api'])->group(function () {
 
 // Route::group(['middleware' => 'teacher:teacher-api'], function () {
-    Route::post('teacherlogout', [App\Http\Controllers\TeacherController::class,'teacherlogout'])->name('teacherlogout');
+    // Route::post('teacherlogout', [App\Http\Controllers\TeacherController::class,'teacherlogout'])->name('teacherlogout');
     Route::post('teacher', [App\Http\Controllers\TeacherController::class,'teacher'])->name('teacher');
 
     Route::get('allproblems', [App\Http\Controllers\TeacherController::class,'available_problem']);
@@ -49,7 +49,7 @@ Route::middleware(['auth:teacher-api'])->group(function () {
     Route::put('changeStatus/{id}', [App\Http\Controllers\TeacherController::class,'update']);
     Route::get('message', [App\Http\Controllers\TeacherController::class,'message']);
     // Route::resource('/message', MessageController::class);
-    Route::get('/tmessage', [App\Http\Controllers\TeacherController::class,'message']);
+    // Route::get('/tmessage', [App\Http\Controllers\TeacherController::class,'message']);
 
 
 });
@@ -74,7 +74,7 @@ Route::middleware(['auth:student-api'])->group(function () {
     // Route::resource('/message', MessageController::class);
     // Route::get('/tmessage', [App\Http\Controllers\TeacherController::class,'message']);
     Route::get('/test', function () {
-        return '$request->user';
+        return 'student';
     });
 
 });

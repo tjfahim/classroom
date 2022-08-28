@@ -15,6 +15,46 @@
             body {
                 font-family: 'Nunito', sans-serif;
             }
+
+            body{
+    margin-top: 20px;
+    background-color: #eee;
+}
+.box
+{
+    position: relative;
+    border-radius: 3px;
+    background: #ffffff;
+    border-top: 3px solid rebeccapurple;
+    margin-bottom: 20px;
+    width: 100%;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+.box.box-primary{
+    border-top-color: aquamarine;
+}
+
+.box-body{
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    padding: 10px;
+}
+.direct-chat .box-body{
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    position: relative;
+    overflow-x: hidden;
+    padding: 0;
+}
+
+.direct-chat-messages{
+    padding: 10px;
+    height: 150px;
+    overflow: auto;
+}
+
         </style>
     </head>
     <body class="antialiased">
@@ -43,7 +83,7 @@
             <div class="col-sm-6 offset-sm-3">
                 <div class="box box-primary direct-chat direct-chat-primary">
                     <div class="box-body">
-                        <div class="direct-chat-massages" id="messages"></div>
+                        <div class="direct-chat-messages" id="messages"></div>
                     </div>
                     <div class="box-footer">
                         <form action="#" method="" id="message_form">

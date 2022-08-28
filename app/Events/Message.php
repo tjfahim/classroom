@@ -35,7 +35,7 @@ class Message
      */
     public function broadcastOn()
     {
-        return new Channel(name:'chat');
+        return new Channel('chat');
     }
     public function broadcastAs()
     {

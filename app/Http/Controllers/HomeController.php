@@ -64,19 +64,21 @@ class HomeController extends Controller
    }
 
 
-//     public function logout()
-//     {
-//        if(auth()->guard('teacher-api')->logout()){
-// return response()->json(['message' => 'Successfully logged out']);
-//        }
-//        elseif(auth()->guard('student-api')->logout()){
+   public function logout(Request $request)
+   {
+    $user = User::where('email', '=', $request->email)->first();
+    if($user->type=='student'){
+     $guard='student-api';
+    }
+    else if($user->type=='teacher') {
+     $guard='teacher-api';
+    }
+       auth()->guard($guard)->logout();
 
-//        }
+       return response()->json(['message' => 'Successfully logged out']);
+   }
 
-//        return response()->json(['message' => 'Successfully logged out']);
 
-//        ;
-//     }
 
     /**
      * Show the application dashboard.

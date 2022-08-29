@@ -17,7 +17,8 @@ class AuthenticateStudent extends Middleware
     {
 
             if ($this->auth->guard('student-api')->check()) {
-                return $this->auth->shouldUse('student-api');
+                // return $this->auth->shouldUse('student-api');
+                echo "Student API";
             }
 
 

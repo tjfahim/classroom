@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Problem_request;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -93,6 +94,16 @@ class StudentController extends Controller
 
         return response()->json(auth()->guard('student-api')->user());
     }
+
+    public function requested_problem()
+    {
+
+        $student_id=Auth::user()->id;
+        $requested_problem=Problem_request::get()->where('users_id', "$student_id");
+
+        return $requested_problem;
+
+}
 
     /**
      * Log the user out (Invalidate the token)

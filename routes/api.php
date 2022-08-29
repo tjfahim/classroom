@@ -46,6 +46,7 @@ Route::middleware(['auth:teacher-api'])->group(function () {
     Route::post('teacherUpdate', [App\Http\Controllers\TeacherController::class,'update'])->name('updateteacher');
 
     Route::get('allproblems', [App\Http\Controllers\TeacherController::class,'available_problem']);
+    Route::get('accepted_problem', [App\Http\Controllers\TeacherController::class,'accepted_problem']);
     // Route::get('changeStatus/{id}', [App\Http\Controllers\TeacherController::class,'changeStatus']);
     Route::put('changeStatus/{id}', [App\Http\Controllers\TeacherController::class,'statusupdate']);
     Route::get('message', [App\Http\Controllers\TeacherController::class,'message']);
@@ -71,6 +72,8 @@ Route::middleware(['auth:student-api'])->group(function () {
     Route::post('studentlogout', [App\Http\Controllers\StudentController::class,'studentlogout'])->name('studentlogout');
     Route::post('student', [App\Http\Controllers\StudentController::class,'student'])->name('student');
     Route::post('studentUpdate', [App\Http\Controllers\StudentController::class,'update'])->name('updatestudent');
+   Route::get('requested_problem', [App\Http\Controllers\StudentController::class,'requested_problem']);
+
     // Route::post('problemcreate', [App\Http\Controllers\Problem_RequestController::class,'store']);
     Route::resource('/problems', Problem_RequestController::class);
     // Route::resource('/message', MessageController::class);

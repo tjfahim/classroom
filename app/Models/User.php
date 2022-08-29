@@ -76,9 +76,10 @@ public function problem_requests()
 {
   return $this->hasMany(Problem_request::class);
 }
-public function messages()
-{
-  return $this->hasMany(message::class);
-}
+
+// public function messages()
+// {
+//   return $this->hasMany(message::class);
+// }
 
 }

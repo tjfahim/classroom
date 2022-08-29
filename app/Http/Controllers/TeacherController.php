@@ -97,7 +97,7 @@ class TeacherController extends Controller
     public function statusupdate(Request $request, $id)
             {
                 $updateproblem = Problem_request::find($id);
-
+                $updateproblem->teacher_id=$request->teacher_id=Auth::user()->id;
                 $updateproblem->status = $request->status=1;
                 $updateproblem->update();
                 return response()->json([
@@ -124,6 +124,15 @@ class TeacherController extends Controller
                     // if($available_problem==0){
                     // }
                     return $available_problem;
+
+        }
+            public function accepted_problem()
+                {
+                    $teacher_id=Auth::user()->id;
+                    $accepted_problem=Problem_request::get()->where('teacher_id', "$teacher_id");
+                    // if($accepted_problem==0){
+                    // }
+                    return $accepted_problem;
 
         }
 

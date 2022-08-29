@@ -23,10 +23,12 @@ return new class extends Migration
             $table->boolean('status')->deafult(0);
             $table->timestamps();
 
-            // $table->bigInteger('student_id')->unsigned()->nullable();
-            // $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
+            $table->bigInteger('teacher_id')->unsigned()->nullable();
+            $table->foreign('teacher_id')->references('id')->on('users')->onDelete('cascade')->nullable();
 
             $table->foreignId('users_id')->constrained()->nullable();
+            // $table->foreignId('teacher_id')->constrained()->nullable();
+            // $table->foreignId('teacher_id')->constrained()->nullable();
         });
 
 

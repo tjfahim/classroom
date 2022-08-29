@@ -32,7 +32,11 @@ return new class extends Migration
             $table->string('student_id')->nullable();
             $table->string('address')->nullable();
             $table->string('phone')->nullable();
-
+            $table->string('subject')->nullable();
+            $table->string('designation')->nullable();
+            $table->string('qualification')->nullable();
+            $table->string('university')->nullable();
+      
 
             $table->timestamps();
         });

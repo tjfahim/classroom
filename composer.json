@@ -13,6 +13,7 @@
         "laravel/ui": "^4.0",
         "pusher/pusher-php-server": "^7.0",
         "tymon/jwt-auth": "*"
+
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

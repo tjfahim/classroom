@@ -1,6 +1,7 @@
 <?php
 
 use App\Events\Message;
+use App\Http\Controllers\EventController;
 use App\Models\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -18,6 +19,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/calendar', function () {
+    return view('event');
+});
 
 Auth::routes();
 
@@ -29,3 +33,5 @@ Route::post('send_message',function (Request $request){
 
         ];
 });
+Route::get('calendar-event', [EventController::class, 'index']);
+Route::post('calendar-crud-ajax', [EventController::class, 'calendarEvents']);

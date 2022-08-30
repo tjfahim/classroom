@@ -17,6 +17,8 @@ class Problem_request extends Model
         'status',
         'users_id',
         'teacher_id',
+        'start_time',
+        'end_time',
     ];
 
 

@@ -35,8 +35,8 @@ return new class extends Migration
             $table->string('subject')->nullable();
             $table->string('designation')->nullable();
             $table->string('qualification')->nullable();
-            $table->string('university')->nullable();
-      
+            $table->string('institute')->nullable();
+
 
             $table->timestamps();
         });

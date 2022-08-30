@@ -96,7 +96,9 @@ class TeacherController extends Controller
 
     public function statusupdate(Request $request, $id)
             {
+
                 $updateproblem = Problem_request::find($id);
+
                 $updateproblem->teacher_id=$request->teacher_id=Auth::user()->id;
                 $updateproblem->status = $request->status=1;
                 $updateproblem->update();
@@ -106,8 +108,19 @@ class TeacherController extends Controller
                     "data" => $updateproblem
                     ]);
 
-
         }
+     public function calendaradd($id)
+        {
+            $calendaradd = Problem_request::find($id);
+              $date=$calendaradd->date;
+              $start_time=$calendaradd->start_time;
+              $end_time=$calendaradd->end_time;
+            return response()->json([
+                "date" =>  $date,
+                "start_time" =>  $start_time,
+                "end_time" =>  $end_time
+                ]);
+    }
 
 
         // public function changeStatus(Request $request, $id)
@@ -120,20 +133,15 @@ class TeacherController extends Controller
         // }
             public function available_problem()
                 {
-                    $available_problem=Problem_request::get()->where('status', '0');
-                    // if($available_problem==0){
-                    // }
+                    $available_problem=Problem_request::where('status', '0')->get();
                     return $available_problem;
 
         }
             public function accepted_problem()
                 {
                     $teacher_id=Auth::user()->id;
-                    $accepted_problem=Problem_request::get()->where('teacher_id', "$teacher_id");
-                    // if($accepted_problem==0){
-                    // }
+                    $accepted_problem=Problem_request::where('teacher_id', "$teacher_id")->get();
                     return $accepted_problem;
-
         }
 
         public function message()

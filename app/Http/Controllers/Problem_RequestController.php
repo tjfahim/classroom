@@ -104,6 +104,8 @@ class Problem_RequestController extends Controller
             'description'=>$request->description,
             'subject'=>$request->subject,
             'date'=>$request->date,
+            'start_time'=>$request->start_time,
+            'end_time'=>$request->end_time,
             'image'=>$request->image,
             'status'=>0,
         ]);

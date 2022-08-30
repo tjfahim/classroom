@@ -51,6 +51,7 @@ Route::middleware(['auth:teacher-api'])->group(function () {
     // Route::get('changeStatus/{id}', [App\Http\Controllers\TeacherController::class,'changeStatus']);
     Route::put('changeStatus/{id}', [App\Http\Controllers\TeacherController::class,'statusupdate']);
     Route::get('message', [App\Http\Controllers\TeacherController::class,'message']);
+    Route::get('calendaradd/{id}', [App\Http\Controllers\TeacherController::class,'calendaradd']);
     // Route::get('event', [App\Http\Controllers\EventController::class,'index']);
     // Route::post('classtime', [App\Http\Controllers\EventController::class,'calendarEvents']);
     // Route::resource('/message', MessageController::class);

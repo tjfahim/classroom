@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\Problem_RequestController;
+use App\Http\Controllers\StripeController;
 use App\Http\Controllers\StudentController;
 
 use App\Models\Problem_request;
@@ -29,6 +30,11 @@ Route::post('studentregister', [App\Http\Controllers\StudentController::class,'s
 Route::post('teacherregister', [App\Http\Controllers\TeacherController::class,'teacherregister'])->name('teacherregister');
 Route::post('login', [App\Http\Controllers\HomeController::class,'login']);
 Route::post('logout', [App\Http\Controllers\HomeController::class,'logout']);
+
+
+
+Route::get('/payment', [StripeController::class, 'handleGet']);
+Route::post('/payment', [StripeController::class, 'handlePost'])->name('stripe.payment');
 
 
 

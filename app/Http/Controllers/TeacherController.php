@@ -133,14 +133,14 @@ class TeacherController extends Controller
         // }
             public function available_problem()
                 {
-                    $available_problem=Problem_request::where('status', '0')->get();
+                    $available_problem=Problem_request::where('status', '0')->paginate(12);
                     return $available_problem;
 
         }
             public function accepted_problem()
                 {
                     $teacher_id=Auth::user()->id;
-                    $accepted_problem=Problem_request::where('teacher_id', "$teacher_id")->get();
+                    $accepted_problem=Problem_request::where('teacher_id', "$teacher_id")->paginate(12);
                     return $accepted_problem;
         }
 

@@ -2,6 +2,7 @@
 
 use App\Events\Message;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\StripeController;
 use App\Models\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -35,3 +36,5 @@ Route::post('send_message',function (Request $request){
 });
 Route::get('calendar-event', [EventController::class, 'index']);
 Route::post('calendar-crud-ajax', [EventController::class, 'calendarEvents']);
+Route::get('/payment', [StripeController::class, 'handleGet']);
+Route::post('/payment', [StripeController::class, 'handlePost'])->name('stripe.payment');

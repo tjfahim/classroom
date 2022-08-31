@@ -99,7 +99,7 @@ class StudentController extends Controller
     {
 
         $student_id=Auth::user()->id;
-        $requested_problem=Problem_request::get()->where('users_id', "$student_id");
+        $requested_problem=Problem_request::where('users_id', "$student_id")->paginate(12);
 
         return $requested_problem;
 

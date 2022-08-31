@@ -20,7 +20,7 @@ class Problem_RequestController extends Controller
         // "success" => true,
         // "message" => "Problem List",
         // "data" => $problem]);
-        return Problem_request::get();
+        return Problem_request::paginate(12);
     }
 
 

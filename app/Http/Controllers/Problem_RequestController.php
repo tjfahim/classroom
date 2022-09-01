@@ -20,7 +20,11 @@ class Problem_RequestController extends Controller
         // "success" => true,
         // "message" => "Problem List",
         // "data" => $problem]);
-        return Problem_request::paginate(12);
+        $student_id=Auth::user()->id;
+        $requested_problem=Problem_request::where('users_id',  '!=',"$student_id")->paginate(12);
+        return $requested_problem;
+    //    $myid= Auth::user()->id;
+    //     return Problem_request::whereNotIn('users_id', "$myid")->paginate(12);
     }
 
 
@@ -98,8 +102,10 @@ class Problem_RequestController extends Controller
         // ]);}
 
 
+
+
         $problem = Problem_request::create([
-            "users_id"=>Auth::user()->id,
+          "users_id"=>Auth::user()->id,
             "title"=>$request->title,
             'description'=>$request->description,
             'subject'=>$request->subject,
@@ -108,7 +114,9 @@ class Problem_RequestController extends Controller
             'end_time'=>$request->end_time,
             'image'=>$request->image,
             'status'=>0,
+
         ]);
+
         return response()->json([
                 "success" => true,
                 "message" => "problem created successfully.",

@@ -84,6 +84,8 @@ Route::middleware(['auth:student-api'])->group(function () {
     Route::post('student', [App\Http\Controllers\StudentController::class,'student'])->name('student');
     Route::post('studentUpdate', [App\Http\Controllers\StudentController::class,'update'])->name('updatestudent');
    Route::get('requested_problem', [App\Http\Controllers\StudentController::class,'requested_problem']);
+   Route::get('requested_group_problem', [App\Http\Controllers\StudentController::class,'requested_group_problem']);
+   Route::post('join_class/{id}', [App\Http\Controllers\StudentController::class,'join_class']);
 
     // Route::post('problemcreate', [App\Http\Controllers\Problem_RequestController::class,'store']);
     Route::resource('/problems', Problem_RequestController::class);

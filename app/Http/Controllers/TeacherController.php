@@ -114,10 +114,14 @@ class TeacherController extends Controller
             $calendaradd = Problem_request::find($id);
               $date=$calendaradd->date;
               $start_time=$calendaradd->start_time;
+              $description=$calendaradd->description;
               $end_time=$calendaradd->end_time;
+              $title=$calendaradd->title;
             return response()->json([
                 "date" =>  $date,
                 "start_time" =>  $start_time,
+                "title" =>  $title,
+                "description" =>  $description,
                 "end_time" =>  $end_time
                 ]);
     }

@@ -48,6 +48,7 @@ class User extends Authenticatable implements JWTSubject
         'designation',
         'qualification',
         'university',
+        'problem_request_id',
 
 
     ];
@@ -76,10 +77,15 @@ class User extends Authenticatable implements JWTSubject
     // }
 
 
-public function problem_requests()
+public function problem_request()
 {
   return $this->hasMany(Problem_request::class);
 }
+
+public function problem_requests()
+    {
+        return $this->belongsToMany(Problem_request::class,'problem_request_user');
+    }
 
 // public function messages()
 // {

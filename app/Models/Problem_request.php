@@ -19,12 +19,19 @@ class Problem_request extends Model
         'teacher_id',
         'start_time',
         'end_time',
+        'user_id',
     ];
 
 
-        public function user(){
+    public function user(){
         return $this->belongsTo(User::class,'users_id','teacher_id');
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class,'problem_request_user');
+    }
+
 
 
 }

@@ -112,18 +112,20 @@ class TeacherController extends Controller
      public function calendaradd($id)
         {
             $calendaradd = Problem_request::find($id);
-              $date=$calendaradd->date;
-              $start_time=$calendaradd->start_time;
-              $description=$calendaradd->description;
-              $end_time=$calendaradd->end_time;
-              $title=$calendaradd->title;
+            // return $calendaradd->date;
+            $data= collect([
+
+                    'date' =>$calendaradd->date,
+                   'start_time' =>$calendaradd->start_time,
+                    'title' =>$calendaradd->end_time,
+                    'subject' =>$calendaradd->description,
+                    'end_time' =>$calendaradd->title,
+                    'description' =>$calendaradd->subject
+            ]);
+
             return response()->json([
-                "date" =>  $date,
-                "start_time" =>  $start_time,
-                "title" =>  $title,
-                "description" =>  $description,
-                "end_time" =>  $end_time
-                ]);
+                'data' => $data->toArray()
+            ]);
     }
 
 

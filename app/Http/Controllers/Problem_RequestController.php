@@ -44,78 +44,66 @@ class Problem_RequestController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+
             public function store(Request $request)
             {
-        //         $input = $request->all();
-        //         $validator = Validator::make($input, [
-        //         'title' => 'required',
-        //         'description' => 'required',
-        //         'subject' => 'required',
-        //         'image' => 'required',
-        //         'date' => 'required',
-        //         ]);
-        //         if($validator->fails()){
-        //         return $this->sendError('Validation Error.', $validator->errors());
-        //         }
-        //         $problem = Problem_request::create($input);
-        //         return response()->json([
-        //         "success" => true,
-        //         "message" => "Problem created successfully.",
-        //         "data" => $problem
-        // ]);
+
+                    // $data= new Problem_request();
+
+                    // if($request->file('image')){
+                    //     $file= $request->file('image');
+                    //     $filename= date('YmdHi').$file->getClientOriginalName();
+                    //     $file-> move(public_path('public/Image'), $filename);
+                    //     $data['image']= $filename;
+                    // }
+
+                    // $data->users_id = Auth::user()->id;
+                    // $data->title = $request->input('title');
+                    // $data->description = $request->input('description');
+                    // $data->subject = $request->input('subject');
+                    // $data->start_time = $request->input('start_time');
+                    // $data->end_time = $request->input('end_time');
+                    // $data->image = $request->input('image');
+                    // $data->status = 0;
+
+                    // $data->save();
 
 
-        // $input=new Problem_request();
-        // $input->title = $request->Problem_request['title'];
-        // $input->description = $request->Problem_request['description'];
-        // $input->subject = $request->Problem_request['subject'];
-        // $input->image = $request->Problem_request['image'];
-        // $input->date = $request->Problem_request['date'];
-        // $input->status = $request->Problem_request['status'];
-
-        // $input->save();
-        // return $input;
-        //     }
-
-       $input = $request->all();
-
-        // $validator = Validator::make($input, [
-        // 'title' => 'required',
-        // 'description' => 'required',
-        // 'subject' => 'required',
-        // 'image' => 'required',
-        // 'date' => 'required',
-        // ]);
-        // if($validator->fails()){
-        // return $this->sendError('Validation Error.', $validator->errors());
-        // }
-
-
-
-        // $problem = Problem_request::create($input);
-
-
-        // return response()->json([
-        // "success" => true,
-        // "message" => "problem created successfully.",
-        // "data" => $problem
-        // ]);}
 
 
 
 
         $problem = Problem_request::create([
-          "users_id"=>Auth::user()->id,
+            "users_id"=>Auth::user()->id,
             "title"=>$request->title,
             'description'=>$request->description,
             'subject'=>$request->subject,
             'date'=>$request->date,
             'start_time'=>$request->start_time,
             'end_time'=>$request->end_time,
-            'image'=>$request->image,
             'status'=>0,
 
+            // $imageName = time().'.'.$request->image->extension(),
+            // 'image'=>$request->image->move(public_path('images'), date('YmdHi').$request->file('image')->getClientOriginalName()),
+            // 'image'=>$request->$imageName,
+
+
+
+        // $imageName = time().'.'.$request->image->getClientOriginalName(),
+        // 'image'=> $request->image->move(public_path('images'), $imageName),
+
+
+        $image = $request->file('image'),
+        $extension = $image->getClientOriginalExtension(),
+        $fileName = time().'.'.$extension,
+
+        $image->move(public_path('images'), $fileName),
+        'image'=>  $request->image = $fileName,
+
         ]);
+
+
 
         return response()->json([
                 "success" => true,
@@ -162,6 +150,8 @@ class Problem_RequestController extends Controller
     public function show($id)
     {
         $problem = Problem_request::find($id);
+        // $problem = Problem_request::where('id', '$id')->get();
+    //    return Problem_request::where('id' ,'==' , $id)->get();
         if (is_null($problem)) {
         return $this->sendError('Problem not found.');
         }

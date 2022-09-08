@@ -2,6 +2,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Problem_request;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Stripe;
 use Session;
 class StripeController extends Controller
@@ -14,17 +16,56 @@ class StripeController extends Controller
         return view('payment');
     }
 
-
+public function index(){
+    return Auth::user();
+}
 
     public function handlePost(Request $request)
     {
-        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-        Stripe\Charge::create ([
-                "amount" => 100 * 150,
-                "currency" => "tk",
-                "source" => $request->stripeToken,
-                "description" => "Making test payment1"
-        ]);
+        // Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        // Stripe\Charge::create ([
+        //         // "id"=>Auth::id(),
+        //         "object"=> "charge",
+        //         "amount" => 100 * 50,
+        //         "currency" => "usd",
+        //         "source" => $request->id,
+        //         "description" => "Payment successful",
+        //         // "billing_details"=> [
+        //         //     "address"=>$address,
+        //         //     "email"=> $email,
+        //         //     "name"=> $name,
+        //         // ],
+
+        // ]);
+
+        $stripe = new \Stripe\StripeClient(
+  'sk_test_51LBF4EHRMz4hUhDWWn0I5WPDdTEDsLPNwKne7mIldHiMvfRjelb6cURQvXMaG0V1w3PsPVsaHkD5qGEvyA1A2caE00fHNNnZMQ'
+);
+$stripe->charges->create([
+  'amount' => 2000,
+  'currency' => 'usd',
+  'source' => 'tok_visa',
+  'description' => 'My First Test Charge (created for API docs at https://www.stripe.com/docs/api)',
+]);
+return $stripe->charges;
+    }
+    public function test()
+    {
+        $stripe = new \Stripe\StripeClient(
+            'pk_test_51LBF4EHRMz4hUhDWtL7J37dd7c0DJ0xuXVIOyEkqiLQbdaJVPlrhz3cw0FiDw8Y7qNH4ts2hqJQe2TgztUXyTKSD00idxoSdTi'
+          );
+          $stripe->charges->create([
+            'amount' => 2000,
+            'currency' => 'usd',
+            'source' => 'tok_visa',
+            'description' => 'My First Test Charge (created for API docs at https://www.stripe.com/docs/api)',
+          ]);
+          $stripe->customers->create([
+            'description' => 'My First Test Customer (created for API docs at https://www.stripe.com/docs/api)',
+          ]);
+
+
+
     }
 
 

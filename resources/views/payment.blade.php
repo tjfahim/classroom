@@ -152,7 +152,7 @@ $(function() {
         } else {
             var token = response['id'];
             $form.find('input[type=text]').empty();
-            $form.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
+            $form.append("<input type='hidden' name='' value='" + token + "'/>");
             $form.get(0).submit();
         }
     }

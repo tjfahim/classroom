@@ -15,6 +15,7 @@ class Problem_RequestController extends Controller
      */
     public function index()
     {
+        
         // $problem = Problem_request::all();
         // return response()->json([
         // "success" => true,
@@ -44,10 +45,19 @@ class Problem_RequestController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function retest(){
+        // return optional(Auth::user())->id;
+        return Auth::user();
+
+
+var_dump($user->id);
+    }
 
 
             public function store(Request $request)
             {
+               return Auth::user();
+
 
                     // $data= new Problem_request();
 
@@ -73,7 +83,8 @@ class Problem_RequestController extends Controller
 
 
 
-
+                // $image = $request->file('image');
+                // $fileName = $image->getClientOriginalName();
         $problem = Problem_request::create([
             "users_id"=>Auth::user()->id,
             "title"=>$request->title,
@@ -84,23 +95,12 @@ class Problem_RequestController extends Controller
             'end_time'=>$request->end_time,
             'status'=>0,
 
-            // $imageName = time().'.'.$request->image->extension(),
-            // 'image'=>$request->image->move(public_path('images'), date('YmdHi').$request->file('image')->getClientOriginalName()),
-            // 'image'=>$request->$imageName,
 
 
-
-        // $imageName = time().'.'.$request->image->getClientOriginalName(),
-        // 'image'=> $request->image->move(public_path('images'), $imageName),
-
-
-        $image = $request->file('image'),
-        $extension = $image->getClientOriginalExtension(),
-        $fileName = time().'.'.$extension,
-
-        $image->move(public_path('images'), $fileName),
-        'image'=>  $request->image = $fileName,
-
+            $image = $request->file('image'),
+            $fileName =$image->getClientOriginalName(),
+            $image->move(public_path('images'), $fileName),
+            'image'=>  $request->image = $fileName,
         ]);
 
 

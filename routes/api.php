@@ -34,7 +34,8 @@ Route::post('logout', [App\Http\Controllers\HomeController::class,'logout']);
 
 
 Route::get('/payment', [StripeController::class, 'handleGet']);
-Route::post('/payment', [StripeController::class, 'handlePost'])->name('stripe.payment');
+Route::post('/payment', [StripeController::class, 'handlePost']);
+Route::post('/retest', [Problem_RequestController::class, 'retest']);
 
 
 
@@ -57,7 +58,7 @@ Route::middleware(['auth:teacher-api'])->group(function () {
     // Route::get('changeStatus/{id}', [App\Http\Controllers\TeacherController::class,'changeStatus']);
     Route::put('changeStatus/{id}', [App\Http\Controllers\TeacherController::class,'statusupdate']);
     Route::get('message', [App\Http\Controllers\TeacherController::class,'message']);
-    Route::get('calendaradd/{id}', [App\Http\Controllers\TeacherController::class,'calendaradd']);
+    // Route::get('calendaradd/{id}', [App\Http\Controllers\TeacherController::class,'calendaradd']);
     // Route::get('event', [App\Http\Controllers\EventController::class,'index']);
     // Route::post('classtime', [App\Http\Controllers\EventController::class,'calendarEvents']);
     // Route::resource('/message', MessageController::class);
@@ -91,8 +92,8 @@ Route::middleware(['auth:student-api'])->group(function () {
     Route::resource('/problems', Problem_RequestController::class);
     // Route::resource('/message', MessageController::class);
     // Route::get('/tmessage', [App\Http\Controllers\TeacherController::class,'message']);
-    Route::get('/test', function () {
-        return 'student';
-    });
+    // Route::get('/test', function () {
+    //     return 'student';
+    // });
 
 });

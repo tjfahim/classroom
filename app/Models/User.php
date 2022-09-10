@@ -87,9 +87,4 @@ public function problem_requests()
         return $this->belongsToMany(Problem_request::class,'problem_request_user');
     }
 
-// public function messages()
-// {
-//   return $this->hasMany(message::class);
-// }
-
 }

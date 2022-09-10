@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\Problem_RequestController;
 use App\Http\Controllers\StripeController;
@@ -32,10 +33,8 @@ Route::post('login', [App\Http\Controllers\HomeController::class,'login']);
 Route::post('logout', [App\Http\Controllers\HomeController::class,'logout']);
 
 
-
-Route::get('/payment', [StripeController::class, 'handleGet']);
-Route::post('/payment', [StripeController::class, 'handlePost']);
-Route::post('/retest', [Problem_RequestController::class, 'retest']);
+Route::post('/comment', [CommentController::class, 'store']);
+Route::post('/reply', [CommentController::class, 'replyStore']);
 
 
 
@@ -87,6 +86,10 @@ Route::middleware(['auth:student-api'])->group(function () {
    Route::get('requested_problem', [App\Http\Controllers\StudentController::class,'requested_problem']);
    Route::get('requested_group_problem', [App\Http\Controllers\StudentController::class,'requested_group_problem']);
    Route::post('join_class/{id}', [App\Http\Controllers\StudentController::class,'join_class']);
+
+
+   Route::get('/payment', [StripeController::class, 'handleGet']);
+   Route::post('/payment', [StripeController::class, 'post']);
 
     // Route::post('problemcreate', [App\Http\Controllers\Problem_RequestController::class,'store']);
     Route::resource('/problems', Problem_RequestController::class);

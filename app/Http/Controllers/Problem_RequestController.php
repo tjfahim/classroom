@@ -15,7 +15,7 @@ class Problem_RequestController extends Controller
      */
     public function index()
     {
-        
+
         // $problem = Problem_request::all();
         // return response()->json([
         // "success" => true,
@@ -45,18 +45,11 @@ class Problem_RequestController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function retest(){
-        // return optional(Auth::user())->id;
-        return Auth::user();
 
-
-var_dump($user->id);
-    }
 
 
             public function store(Request $request)
             {
-               return Auth::user();
 
 
                     // $data= new Problem_request();

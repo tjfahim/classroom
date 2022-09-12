@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Problem_request;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Validator;
 class Problem_RequestController extends Controller
 {
@@ -271,6 +272,20 @@ class Problem_RequestController extends Controller
         //         "data" => $problem
         //         ]);
         // }
+
+
+        public function group_problem_user($id)
+    {
+
+       $requested_problem = Problem_request::find($id)->id;
+        $group_problem_user=DB::table('problem_request_user')->where('problem_request_id', "$requested_problem")->paginate(12);
+
+        return  $group_problem_user;
+        // $group_problems = json_decode($group_problem_user, true);
+
+        // json_encode(count($return));
+
+}
 
 
 }

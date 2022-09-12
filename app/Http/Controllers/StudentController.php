@@ -118,10 +118,18 @@ class StudentController extends Controller
 
         $student_id=Auth::user()->id;
         $requested_problem=Problem_request::where('users_id', "$student_id")->paginate(12);
-
         return $requested_problem;
 
 }
+    public function requested_problem_id($id)
+    {
+
+        $student_id=Auth::user()->id;
+        $group_problems=Problem_request::where('users_id', "$student_id")->get();
+        return $group_problems[$id];
+
+}
+
     public function requested_group_problem()
     {
 
@@ -131,15 +139,36 @@ class StudentController extends Controller
         return $requested_problem;
 
 }
-    public function all()
+    public function requested_group_problem_id($id)
     {
 
         $student_id=Auth::user()->id;
-        $requested_problem=Problem_request::where('users_id', "$student_id")->paginate(12);
-
-        return $requested_problem;
+        $requested_problem=DB::table('problem_request_user')->where('user_id', "$student_id")->get();
+        $group_problems = json_decode($requested_problem, true);
+        return $group_problems[$id];
 
 }
+    public function all()
+    {
+
+    // $student_id=Auth::user()->id;
+    // $requested_problem=Problem_request::select('users_id');
+    // $requested_group_problem=DB::table('problem_request_user')->select('problem_request_id')->union($requested_problem)->get();
+
+    $first = DB::table('problem_requests')
+    ->selett('users_id');
+
+    $users = DB::table('problem_request_user')
+        ->select('problem_request_id')
+        ->union($first)
+        ->get();
+        return $users;
+    // return $requested_group_problem;
+    // return $requested_group_problem->union($requested_problem);
+
+}
+
+
 
     /**
      * Log the user out (Invalidate the token)

@@ -84,15 +84,20 @@ Route::middleware(['auth:student-api'])->group(function () {
     Route::post('student', [App\Http\Controllers\StudentController::class,'student'])->name('student');
     Route::post('studentUpdate', [App\Http\Controllers\StudentController::class,'update'])->name('updatestudent');
    Route::get('requested_problem', [App\Http\Controllers\StudentController::class,'requested_problem']);
+   Route::get('requested_problem_id/{id}', [App\Http\Controllers\StudentController::class,'requested_problem_id']);
    Route::get('requested_group_problem', [App\Http\Controllers\StudentController::class,'requested_group_problem']);
+   Route::get('requested_group_problem_id/{id}', [App\Http\Controllers\StudentController::class,'requested_group_problem_id']);
    Route::post('join_class/{id}', [App\Http\Controllers\StudentController::class,'join_class']);
 
 
    Route::get('/payment', [StripeController::class, 'handleGet']);
-   Route::post('/payment', [StripeController::class, 'post']);
+   Route::post('/payment/{id}', [StripeController::class, 'payment']);
+   Route::post('/group_payment/{id}', [StripeController::class, 'group_payment']);
 
     // Route::post('problemcreate', [App\Http\Controllers\Problem_RequestController::class,'store']);
     Route::resource('/problems', Problem_RequestController::class);
+    Route::get('group_problem_user/{id}', [App\Http\Controllers\Problem_RequestController::class,'group_problem_user']);
+
     // Route::resource('/message', MessageController::class);
     // Route::get('/tmessage', [App\Http\Controllers\TeacherController::class,'message']);
     // Route::get('/test', function () {

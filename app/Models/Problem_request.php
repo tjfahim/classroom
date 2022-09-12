@@ -32,6 +32,10 @@ class Problem_request extends Model
         return $this->belongsToMany(User::class,'problem_request_user');
     }
 
+    public function payment(){
+        return $this->hasOne(Payment::class);
+    }
+
 
 
 
